@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package sample.v1;
+
+option go_package = "github.com/fumiyakk/modular-monolith-sample/gen/sample/v1;samplev1";
+
+service SampleService {
+  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
+  rpc GetContract(GetContractRequest) returns (GetContractResponse);
+  rpc GetUser(GetUserRequest) returns (GetUserResponse);
+}
+
+message CreateUserRequest {
+  string name = 1;
+}
+
+message CreateUserResponse {
+  string user_id = 1;
+  string contract_id = 2;
+}
+
+message GetContractRequest {
+  string id = 1;
+}
+
+message GetContractResponse {
+  Contract contract = 1;
+}
+
+message GetUserRequest {
+  string id = 1;
+}
+
+message GetUserResponse {
+  User user = 1;
+}
+
+
+message User {
+  string id = 1;
+  string name = 2;
+}
+
+message Contract {
+  string id = 1;
+  string user_id = 2;
+  ContractStatus status = 3;
+}
+
+enum ContractStatus {
+  CONTRACT_STATUS_UNSPECIFIED = 0;
+  CONTRACT_STATUS_ACTIVE = 1;
+  CONTRACT_STATUS_INACTIVE = 2;
+}
